@@ -12,7 +12,6 @@ Set up projects. Implemented first gesture recognition.
 
 ## Week 7
 
-Able to activate keyboard keys from the OSX app
-Able to detect three different gestures (left and right tilt and forward tilt). Started working on the bluetooth communication. 
+Able to activate keyboard keys from the OSX app. Able to detect three different gestures (left and right tilt and forward tilt). Started working on the bluetooth communication. 
 
 ## Week 8
