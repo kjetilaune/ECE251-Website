@@ -6,10 +6,13 @@ TV1215 is an Android application that let’s a person connect their Android pho
 
 # Progress
 
-## Week 7
+## Week 6
 
 Set up projects. Implemented first gesture recognition. 
 
-## Week 8
+## Week 7
 
 Able to activate keyboard keys from the OSX app
+Able to detect three different gestures (left and right tilt and forward tilt). Started working on the bluetooth communication. 
+
+## Week 8
