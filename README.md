@@ -18,3 +18,4 @@ Able to activate keyboard keys from the OSX app. Able to detect three different 
 Started looking into the opportunity for using machine learning for gesture recognition. Established Bluetooth connection between phone and macbook. Able to use gestures to controll the macbook.
 
 ## Week 9
+Added support for changing songs and play/pause music on Spotify. Added support for controlling power-point presentations. Added support for browsing Imgur. Implemented six new gestures. Implemented a way to switch between applications on the Macbook
