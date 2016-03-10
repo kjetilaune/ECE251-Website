@@ -19,3 +19,6 @@ Started looking into the opportunity for using machine learning for gesture reco
 
 ## Week 9
 Added support for changing songs and play/pause music on Spotify. Added support for controlling power-point presentations. Added support for browsing Imgur. Implemented six new gestures. Implemented a way to switch between applications on the Macbook
+
+## Week 10
+Added a mousepad in the Android app that controls the mouse pointer on the mac, both movement and clicks. Also added a scrollpad that enables scrolling on the mac. Implemented a keyboard on the Android app that lets a user write text on the mac. 
