@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h1 class="section-heading">Overview</h1>
-                    <p>This section will descripe our project, with goals, objectives, functionalities, limitations and challenges.</p>
+                    <p>This section will describe our project, with goals, objectives, functionalities, limitations and challenges.</p>
                     <h2 class="section-subheading text-muted" style="margin-top: 50px;">Project goal and objective</h2>
                     <p>For this project we wanted to make a remote control for a Macbook, using an Android application. We wanted to be able to hook the computer up with a TV and then be able to control the computer from the sofa, by only using the Android app. By making such an application, we remove the need for purchasing external hardware, such as a wireless keyboard and mouse. To remove the need for visual attention when using the app, we implemented 9 different gestures that can be used to control different parts of different applications. The communication is done over Bluetooth Low Energy. </p>
                 </div>
@@ -118,17 +118,41 @@
                     <p>When you open the Android app, you will see a list of application modes. These modes includes information about what each gesture will do. When you select one of the modes, the Macbook will automatically open the corresponding application.</p>
                     <img src="img/homescreen.png" width="350" style="margin-top: 50px; margin-bottom: 50px;">
                     <p>The mentioned gestures allows you to perform application-specific tasks. For instance, when you are using YouTube, you can enter and exit fullscreen, control the volume, play and pause the video and go to the next video, all by using the different gestures. </p>
+                    <p>For each gesture, we also had an OpenGL visualization of each gesture. This can be shown by pressing the info button next to each Gesture-Action pair.</p>
                     <img src="img/youtubemode.png" width="350" style="margin-top: 50px; margin-bottom: 50px;">
                     <p>Every application mode will contain the "Keyboard & Mouse" option. In every application mode, the "Move backwards"-gesture will bring you to the "Keyboard & Mouse"-activity. This activity contains a touch pad that can be used to control the mouse pointer on the Macbook. The touchpad is also clickable just like the touch pad on the computer. To the right of the touch pad, you will find the scroll pad. Moving your finger up and down the scroll pad will cause the current application on the Macbook to scroll. We also have implemented the option of text input. The user can write text with the Android keyboard, and this will then be sent to the Macbook.</p>
                     <img src="img/keyboardandmouse.png" width="350" style="margin-top: 50px; margin-bottom: 50px;">
+
                 </div>
             </div>
-            <div>
+            <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-subheading text-muted" style="margin-top: 50px;">Communication</h2>
-                    <p>To be as energy aware as possible, we chose to use Bluetooth Low Energy as our communication medium. We set the Android app as a peripheral and wrote an Objective-C OS X application that acted as a client. We have several different bluetooth characteristics for the different actions, and made the OS X app subscribe to the changes in the peripheral's characteristics. </p>
+                    <h2 class="section-subheading text-muted" style="margin-top: 50px;">Challenges</h2>
+                    <p>In development, we had three major challenges: how to communicate, how to write an OS X app that could control other OS X apps and how to recognize gestures.</p>
+                    <p>To be as energy aware as possible, we chose to use Bluetooth Low Energy as our communication medium. We set the Android app as a peripheral and wrote an Objective-C OS X application that acted as a client. We have several different bluetooth characteristics for the different actions, and made the OS X app subscribe to the changes in the peripheral's characteristics. Both Apple and Google provide good frameworks and help to get started with Bluetooth communication.</p>
+                    <p>After some research, we found that the Quartz Event Services allows an OS X app to generate virtual keyboard-, mouse- and scrollwheel events. The next step was to research available keyboard shortcuts for each application mode. After choosing the shortcuts we wanted to implement, we made a dictionary for each application mode, where the key was the performed gesture and the value was a list of the keys in the appropriate shortcut.</p>
+                    <p>The gesture recognition is done in two different ways. For the three tilt gestures (forward-, left- and right tilt) we only look at the gyroscope values and look at how much rotation there was in each axis. For the remaining six gestures, we had to look at both gyroscope and accelerometer data. We transform the accelerometer data into velocity, and look at the velocity in the three axes. We then find the axis with the highest value, and set this axis as the dominant. We then split the values of each axis into four equally sized intervals and decide if the phone was moving along the axes in positive or negative direction or did not move at all for these four partitions. We represented this by 1 (movement along positive axis), -1 (movement along negative axis) or 0 (no movement). After doing this for all three axes we had 12 numbers that represent the gesture. We could then match these 12 values with predefined matrices to see if we find a matching gesture. For instance, after performing the calculations on the data from a gesture, we might get X = [1, 1, 1, 1], Y = [0, 0, 0, 0] and Z = [0, 0, 0, 0]. This means that we only have movement along the positive X-axis and this corresponds to a right movement. Finally, we looked at the gyroscope data, to see if there was rotation larger than a given threshold. If the rotation was smaller than the threshold, we would count the gesture as a right movement. </p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-subheading text-muted" style="margin-top: 50px;">Limitations and Future Work</h2>
+                    <p>As of now, the system only supports control of Imgur, YouTube, Netflix, Spotify and Google Slides. However, it would be easy to add more application modes later on. The only requirement for adding more application modes, is that the applications to be controlled have keyboard shortcuts that can control them. The system only works between an Android phone and a Mac, but the nature of the Bluetooth communication would easily let us implement an iOS app or a Windows app that could be part of the system. We were looking at the possibility of using machine learning for the gesture recognition, and letting the users define their own gestures, but decided that having predefined gestures would be a good way to go about it, since a user might forget what the gesture they made was after some time. The way we implemented the gesture recognition is limited to movement along one axis and only one direction per gesture. This means that the system will not be able to detect for instance a circle or a gesture that starts by moving to the right and then moves back to the left. </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-subheading text-muted" style="margin-top: 50px;">What we have learned and what could be done differently</h2>
+                    <p>We have never worked with gyroscope, accelerometer or bluetooth before, and it was exciting to learn more about them. The gyroscope was very accurate, and caused no problems when implementing the tilt gestures. The accelerometer, however, was a lot less accurate, and caused a lot of hours spent coming up with a good way to recognize gestures. For a more robust and richer set of gestures, we could have looked more into machine learning. </p>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-subheading text-muted" style="margin-top: 50px;">Technologies Used</h2>
+                    <p>OS X Core Bluetooth<br>Quartz Event Services<br>android.bluetooth (le)<br>OpenGL</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -216,9 +240,9 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <h4>Our
+                                <h4>The
                                     <br>Finished
-                                    <br>Product!</h4>
+                                    <br>App!</h4>
                             </div>
                         </li>
                     </ul>
